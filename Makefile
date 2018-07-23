@@ -1,4 +1,4 @@
-PKG_NAME := kactivites-stats
+PKG_NAME := kactivities-stats
 URL = 
 ARCHIVES = 
 

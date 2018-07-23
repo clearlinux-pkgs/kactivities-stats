@@ -4,19 +4,50 @@
 #
 Name     : kactivities-stats
 Version  : 5.48.0
-Release  : 1
+Release  : 2
 URL      : https://download.kde.org/stable/frameworks/5.48/kactivities-stats-5.48.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.48/kactivities-stats-5.48.0.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : GPL-3.0 LGPL-2.0 LGPL-2.1
+License  : LGPL-2.0 LGPL-2.1 LGPL-3.0
+Requires: kactivities-stats-lib
+Requires: kactivities-stats-license
+BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : kactivities-dev
 
 %description
 # Commit policy
 Every non-trivial patch must go through the review before it goes into the
 master branch.
+
+%package dev
+Summary: dev components for the kactivities-stats package.
+Group: Development
+Requires: kactivities-stats-lib
+Provides: kactivities-stats-devel
+
+%description dev
+dev components for the kactivities-stats package.
+
+
+%package lib
+Summary: lib components for the kactivities-stats package.
+Group: Libraries
+Requires: kactivities-stats-license
+
+%description lib
+lib components for the kactivities-stats package.
+
+
+%package license
+Summary: license components for the kactivities-stats package.
+Group: Default
+
+%description license
+license components for the kactivities-stats package.
+
 
 %prep
 %setup -q -n kactivities-stats-5.48.0
@@ -26,7 +57,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532297772
+export SOURCE_DATE_EPOCH=1532305979
 mkdir clr-build
 pushd clr-build
 %cmake ..
@@ -34,11 +65,50 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1532297772
+export SOURCE_DATE_EPOCH=1532305979
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/kactivities-stats
+cp COPYING.LGPL-3 %{buildroot}/usr/share/doc/kactivities-stats/COPYING.LGPL-3
+cp COPYING.LGPL-2.1 %{buildroot}/usr/share/doc/kactivities-stats/COPYING.LGPL-2.1
+cp COPYING.LGPL-2 %{buildroot}/usr/share/doc/kactivities-stats/COPYING.LGPL-2
 pushd clr-build
 %make_install
 popd
 
 %files
 %defattr(-,root,root,-)
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/KF5/KActivitiesStats/KActivities/Stats/Cleaning
+/usr/include/KF5/KActivitiesStats/KActivities/Stats/Query
+/usr/include/KF5/KActivitiesStats/KActivities/Stats/ResultModel
+/usr/include/KF5/KActivitiesStats/KActivities/Stats/ResultSet
+/usr/include/KF5/KActivitiesStats/KActivities/Stats/ResultWatcher
+/usr/include/KF5/KActivitiesStats/KActivities/Stats/Terms
+/usr/include/KF5/KActivitiesStats/kactivitiesstats/cleaning.h
+/usr/include/KF5/KActivitiesStats/kactivitiesstats/kactivitiesstats_export.h
+/usr/include/KF5/KActivitiesStats/kactivitiesstats/query.h
+/usr/include/KF5/KActivitiesStats/kactivitiesstats/resultmodel.h
+/usr/include/KF5/KActivitiesStats/kactivitiesstats/resultset.h
+/usr/include/KF5/KActivitiesStats/kactivitiesstats/resultwatcher.h
+/usr/include/KF5/KActivitiesStats/kactivitiesstats/terms.h
+/usr/include/KF5/kactivitiesstats_version.h
+/usr/lib64/cmake/KF5ActivitiesStats/KF5ActivitiesStatsConfig.cmake
+/usr/lib64/cmake/KF5ActivitiesStats/KF5ActivitiesStatsConfigVersion.cmake
+/usr/lib64/cmake/KF5ActivitiesStats/KF5ActivitiesStatsLibraryTargets-relwithdebinfo.cmake
+/usr/lib64/cmake/KF5ActivitiesStats/KF5ActivitiesStatsLibraryTargets.cmake
+/usr/lib64/libKF5ActivitiesStats.so
+/usr/lib64/pkgconfig/libKActivitiesStats.pc
+/usr/lib64/qt5/mkspecs/modules/qt_KActivitiesStats.pri
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/libKF5ActivitiesStats.so.1
+/usr/lib64/libKF5ActivitiesStats.so.5.48.0
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/kactivities-stats/COPYING.LGPL-2
+/usr/share/doc/kactivities-stats/COPYING.LGPL-2.1
+/usr/share/doc/kactivities-stats/COPYING.LGPL-3
