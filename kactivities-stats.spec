@@ -4,7 +4,7 @@
 #
 Name     : kactivities-stats
 Version  : 5.48.0
-Release  : 2
+Release  : 3
 URL      : https://download.kde.org/stable/frameworks/5.48/kactivities-stats-5.48.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.48/kactivities-stats-5.48.0.tar.xz
 Summary  : No detailed summary available
