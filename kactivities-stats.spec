@@ -6,7 +6,7 @@
 #
 Name     : kactivities-stats
 Version  : 5.50.0
-Release  : 5
+Release  : 6
 URL      : https://download.kde.org/stable/frameworks/5.50/kactivities-stats-5.50.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.50/kactivities-stats-5.50.0.tar.xz
 Source99 : https://download.kde.org/stable/frameworks/5.50/kactivities-stats-5.50.0.tar.xz.sig
@@ -60,7 +60,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1536428384
+export SOURCE_DATE_EPOCH=1536429910
 mkdir clr-build
 pushd clr-build
 %cmake ..
@@ -68,7 +68,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1536428384
+export SOURCE_DATE_EPOCH=1536429910
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/kactivities-stats
 cp COPYING.LGPL-2 %{buildroot}/usr/share/doc/kactivities-stats/COPYING.LGPL-2
