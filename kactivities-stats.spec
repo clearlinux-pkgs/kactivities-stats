@@ -5,16 +5,17 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kactivities-stats
-Version  : 5.55.0
-Release  : 13
-URL      : https://download.kde.org/stable/frameworks/5.55/kactivities-stats-5.55.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.55/kactivities-stats-5.55.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.55/kactivities-stats-5.55.0.tar.xz.sig
+Version  : 5.56.0
+Release  : 14
+URL      : https://download.kde.org/stable/frameworks/5.56/kactivities-stats-5.56.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.56/kactivities-stats-5.56.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.56/kactivities-stats-5.56.0.tar.xz.sig
 Summary  : A library for accessing the usage data collected by the activities system
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1 LGPL-3.0
 Requires: kactivities-stats-lib = %{version}-%{release}
 Requires: kactivities-stats-license = %{version}-%{release}
+BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : kactivities-dev
@@ -28,6 +29,7 @@ Summary: dev components for the kactivities-stats package.
 Group: Development
 Requires: kactivities-stats-lib = %{version}-%{release}
 Provides: kactivities-stats-devel = %{version}-%{release}
+Requires: kactivities-stats = %{version}-%{release}
 
 %description dev
 dev components for the kactivities-stats package.
@@ -51,22 +53,23 @@ license components for the kactivities-stats package.
 
 
 %prep
-%setup -q -n kactivities-stats-5.55.0
+%setup -q -n kactivities-stats-5.56.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1549737449
+export SOURCE_DATE_EPOCH=1552159864
 mkdir -p clr-build
 pushd clr-build
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1549737449
+export SOURCE_DATE_EPOCH=1552159864
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kactivities-stats
 cp COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kactivities-stats/COPYING.LGPL-2
@@ -106,7 +109,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5ActivitiesStats.so.1
-/usr/lib64/libKF5ActivitiesStats.so.5.55.0
+/usr/lib64/libKF5ActivitiesStats.so.5.56.0
 
 %files license
 %defattr(0644,root,root,0755)
