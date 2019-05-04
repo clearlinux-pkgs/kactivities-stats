@@ -6,7 +6,7 @@
 #
 Name     : kactivities-stats
 Version  : 5.57.0
-Release  : 16
+Release  : 17
 URL      : https://download.kde.org/stable/frameworks/5.57/kactivities-stats-5.57.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.57/kactivities-stats-5.57.0.tar.xz
 Source99 : https://download.kde.org/stable/frameworks/5.57/kactivities-stats-5.57.0.tar.xz.sig
@@ -60,15 +60,22 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1555320532
+export SOURCE_DATE_EPOCH=1556999507
 mkdir -p clr-build
 pushd clr-build
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1555320532
+export SOURCE_DATE_EPOCH=1556999507
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kactivities-stats
 cp COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kactivities-stats/COPYING.LGPL-2
